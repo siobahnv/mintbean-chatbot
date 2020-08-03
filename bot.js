@@ -36,6 +36,14 @@ const controller = new Botkit({
     storage
 });
 
+// nasa_api_url = 'https://api.nasa.gov/insight_weather/?api_key=' + process.env.NASA_API_KEY + '&feedtype=json&ver=1.0'
+// const nasa_controller = new Botkit({
+//     webhook_uri: nasa_api_url,
+//     adapterConfig: {
+//         key: process.env.NASA_API_KEY
+//     }
+// });
+
 if (process.env.CMS_URI) {
     controller.usePlugin(new BotkitCMSHelper({
         uri: process.env.CMS_URI,
