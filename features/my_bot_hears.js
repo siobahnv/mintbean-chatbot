@@ -9,12 +9,9 @@ module.exports = function(controller) {
         await bot.reply(message, "Hi, I'm Miss Pibbles!");
     });
 
-    controller.hears(async (message) => message.text && message.text.toLowerCase() === 'weather', ['message'], async (bot, message) => {
-        await bot.reply(message, "Hi, I'm Miss Pibbles!");
-    });
-
     // use a regular expression to match the text of the message
-    controller.hears(new RegExp(/^weather/), ['message','direct_message'], async function(bot, message) {
+    const my_regex = /\bweather|\bmars|\bMars/g;
+    controller.hears(new RegExp(my_regex), ['message','direct_message'], async function(bot, message) {
         await bot.reply(message,{ text: 'The weather on Mars is fantastic!' });
     });
 
