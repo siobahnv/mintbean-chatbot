@@ -26,4 +26,20 @@ module.exports = function(controller) {
 
     });
 
+    controller.hears(new RegExp(/\w+/), ['message','direct_message'], async function(bot, message) {
+        await bot.reply(message,{ text: 'I heard something.' });
+
+        nasa_api_url = 'https://api.nasa.gov/insight_weather/?api_key=' + process.env.NASA_API_KEY + '&feedtype=json&ver=1.0'
+        let response = await fetch(nasa_api_url);
+        let data = await response.json();
+        var firstKeyEntries = Object.entries(data)[0];
+        await bot.reply(message,{
+            text: 'Here are some suggestions, relating to the weather on Mars.', 
+            quick_replies: [ 
+                { title: 'Temperature', payload: 'The average temperature is ' + firstKeyEntries[1].AT.av + ' °F', }, 
+                { title: 'Season', payload: 'The season is ' + firstKeyEntries[1].Season, } 
+            ] 
+        });
+    });
+
 }
