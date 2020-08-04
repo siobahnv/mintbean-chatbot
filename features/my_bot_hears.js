@@ -20,9 +20,9 @@ module.exports = function(controller) {
         nasa_api_url = 'https://api.nasa.gov/insight_weather/?api_key=' + process.env.NASA_API_KEY + '&feedtype=json&ver=1.0'
         let response = await fetch(nasa_api_url);
         let data = await response.json();
-        var firstKeyEntries = Object.entries(data)[0];
-        await bot.reply(message, 'The season is ' + firstKeyEntries[1].Season)
-        await bot.reply(message, 'The average temperature is ' + firstKeyEntries[1].AT.av + ' °F');
+        var firstKeyEntries = Object.values(data)[0];
+        await bot.reply(message, 'The season is ' + firstKeyEntries.Season)
+        await bot.reply(message, 'The average temperature is ' + firstKeyEntries.AT.av + ' °F');
 
     });
 
